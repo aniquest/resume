@@ -1,24 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import LeftSidebar from './component/LeftSidebar';
+import RightSidebar from './component/RightSidebar';
+import Workspace from './component/Workspace';
 
 function App() {
+  const [isLeftVisible, setLeftIsVisible] = useState(true);
+  const [isRightVisible, setRightIsVisible] = useState(true);
+
+  const handleLeftClick = () => {
+    setLeftIsVisible(!isLeftVisible);
+  };
+
+  const handleRightClick = () => {
+    setRightIsVisible(!isRightVisible);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <LeftSidebar visible={isLeftVisible}/>
+      <Workspace text='我的简历' onLeftClick={handleLeftClick} onRightClick={handleRightClick} />
+      <RightSidebar visible={isRightVisible}/>
     </div>
   );
 }

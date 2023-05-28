@@ -1,0 +1,12 @@
+.LeftSidebar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+  
+.Sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #2E2E2E;
+}
