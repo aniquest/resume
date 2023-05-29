@@ -6,6 +6,7 @@ import homeicon from '../icons/home.svg'
 import topicon from '../icons/top.svg'
 
 import { MyButton } from './Button';
+import Draggable from 'react-draggable';
 
 interface WorkspaceProps {
   text: string;
@@ -30,8 +31,14 @@ const Workspace: React.FC<WorkspaceProps> = ({ text, onLeftClick, onRightClick }
       </div>
 
 
-      <div className='WorkspaceContent'>Í
-      
+      <div className='WorkspaceContent'>
+        <Draggable>
+          
+            <div style={{ color: 'white' }}>
+              I can be dragged and resized
+            </div>
+
+        </Draggable>
       </div>
     </div>
 
