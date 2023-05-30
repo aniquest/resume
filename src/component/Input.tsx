@@ -2,7 +2,8 @@ import React from 'react';
 
 export interface InputProps {
   title: string;
-  onClick: () => void;
+  text: string,
+  onChange: (text: string) => void;
 }
 
 export class MyInput extends React.Component<InputProps> {
@@ -53,9 +54,10 @@ export class MyInput extends React.Component<InputProps> {
             outline: 'none',
             boxShadow: 'none',
           }}
+          value={this.props.text}
           onMouseEnter={this.handleMouseEnter}
           onMouseLeave={this.handleMouseLeave}
-          onClick={this.props.onClick}
+          onChange={(e) => { this.props.onChange(e.target.value) }}
         />
       </div>
     );

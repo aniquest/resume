@@ -4,9 +4,9 @@ import lefticon from '../icons/arrow-left.svg'
 import righticon from '../icons/arrow-right.svg'
 import homeicon from '../icons/home.svg'
 import topicon from '../icons/top.svg'
-
 import { MyButton } from './Button';
 import Draggable from 'react-draggable';
+import MyLogin from './Login';
 
 interface WorkspaceProps {
   text: string;
@@ -19,29 +19,23 @@ const Workspace: React.FC<WorkspaceProps> = ({ text, onLeftClick, onRightClick }
     <div className='Workspace'>
       <div className='WorkspaceTopbar'>
         <MyButton src={lefticon} onClick={onLeftClick} />
-
         <div className='WorkspaceTitle'>
           <MyButton src={homeicon} onClick={onRightClick} />
           <p className='Title'>{text}</p>
           <MyButton src={topicon} onClick={onRightClick} />
         </div>
-
         <MyButton src={righticon} onClick={onRightClick} />
-
       </div>
-
 
       <div className='WorkspaceContent'>
         <Draggable>
-          
-            <div style={{ color: 'white' }}>
-              I can be dragged and resized
-            </div>
-
+          <div style={{ color: 'white' }}>
+            I can be dragged and resized
+          </div>
         </Draggable>
       </div>
-    </div>
 
+    </div>
   );
 };
 

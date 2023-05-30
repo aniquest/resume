@@ -20,7 +20,7 @@ function App() {
   return (
     <div className="App">
       <LeftSidebar visible={isLeftVisible}/>
-      <Workspace text='我的简历' onLeftClick={handleLeftClick} onRightClick={handleRightClick} />
+      <Workspace text='乌拉乌拉233' onLeftClick={handleLeftClick} onRightClick={handleRightClick} />
       <RightSidebar visible={isRightVisible}/>
     </div>
   );
