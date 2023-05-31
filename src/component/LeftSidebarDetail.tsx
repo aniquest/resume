@@ -1,5 +1,8 @@
+import cloudbase from '@cloudbase/js-sdk';
 import React from 'react';
 import { BasicInfo } from '../models/LeftSidebarModel';
+import ResumeData from '../service/GetResumeData';
+import getResumeData from '../service/GetResumeData';
 import { MyInput } from './Input';
 
 
@@ -57,28 +60,78 @@ const Common: React.FC = () => {
   )
 }
 
+class LeftSidebarDetail extends React.Component {
+  state = {
+    isLoading: true,
+    error: null,
+    basicInfo: {name:"",birthday:"",title:"",email:"",phone:""},
+  };
 
-const LeftSidebarDetail: React.FC = () => {
-  return (
-    <div style={{
-      display: 'flex',
-      flexDirection: 'column',
-      width: '100%',
-      justifyContent: 'center',
-      backgroundColor: '#171717',
-      borderRight: '3px solid #2E2E2E',
-      padding: '16px',
-    }}>
+  componentDidMount() {
+    const data = new ResumeData();
+    data
+      .signIn()
+      .then(() => {
+        data
+          .getResumeData()
+          .then((res) => {
+            this.setState({
+              basicInfo: res,
+              isLoading: false,
+            });
+          })
+          .catch(error => {
+            this.setState({
+              error: error,
+              isLoading: false,
+            });
+          })
+      })
+      .catch(error => {
+        this.setState({
+          error: error,
+          isLoading: false,
+        });
+      })
+  }
+
+  render() {
+    const { basicInfo, isLoading, error } = this.state;
+
+    if (isLoading) {
+      return <div>loading...</div>
+    }
+
+    if (error) {
+      return <div>error...</div>
+    }
+
+    return (
       <div style={{
-        overflowY: 'auto',
+        display: 'flex',
+        flexDirection: 'column',
+        width: '100%',
+        justifyContent: 'center',
+        backgroundColor: '#171717',
+        borderRight: '3px solid #2E2E2E',
+        padding: '16px',
       }}>
-        <Basic title='' name='aaa' birthday='bbb' email='ccc' phone=''></Basic>
-        <Location></Location>
-        <ProfessionalSkill />
-      </div>
+        <div style={{
+          overflowY: 'auto',
+        }}>
+          <Basic
+            title={basicInfo.title}
+            name={basicInfo.name}
+            birthday={basicInfo.birthday}
+            email={basicInfo.email}
+            phone={basicInfo.phone} ></Basic>
+          <Location></Location>
+          <ProfessionalSkill />
+        </div>
 
-    </div>
-  );
-};
+      </div>
+    );
+  }
+}
 
 export default LeftSidebarDetail;
