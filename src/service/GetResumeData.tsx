@@ -62,7 +62,7 @@ export default class ResumeData {
       .then((res) => {
         console.log(res);
       })
-      .then(console.error);
+      .catch(console.error);
   }
 
   public updateResumeData(basicInfo: BasicInfo) {
@@ -71,12 +71,14 @@ export default class ResumeData {
         // 云函数名称
         name: "updateResumeData",
         // 传给云函数的参数
-        data: basicInfo
+        data: {
+          'basic_info': basicInfo
+        }
       })
       .then((res) => {
         console.log(res);
       })
-      .then(console.error);
+      .catch(console.error);
   }
 }
 

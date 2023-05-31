@@ -7,18 +7,28 @@ import { MyButton } from './Button';
 import { MyInput } from './Input';
 import topicon from '../icons/top.svg'
 
+interface IBasicInfo {
+  basicInfo: BasicInfo,
+  onChanged: (info: BasicInfo) => void,
+}
 
-const Basic: React.FC<BasicInfo> = (info: BasicInfo) => {
-  return (
-    <div style={{ width: '400px' }}>
-      <label style={{ color: 'white' }}>基本信息</label>
-      <MyInput title='姓名' text={info.name} onChange={(text) => { console.log(text); }}></MyInput>
-      <MyInput title='生日' text={info.birthday} onChange={(text) => { info.birthday = text }}></MyInput>
-      <MyInput title='邮箱' text={info.email} onChange={(text) => { info.email = text }}></MyInput>
-      <MyInput title='电话' text={info.phone} onChange={(text) => { info.phone = text }}></MyInput>
-    </div>
-  );
-};
+class Basic extends React.Component<IBasicInfo> {
+
+  render() {
+    const {basicInfo, onChanged} = this.props;
+
+    return (
+      <div style={{ width: '400px' }}>
+        <label style={{ color: 'white' }}>基本信息</label>
+        <MyInput title='姓名' text={basicInfo.name} onChange={(text) => { basicInfo.name=text; onChanged(basicInfo);  }}></MyInput>
+        <MyInput title='生日' text={basicInfo.birthday} onChange={(text) => { basicInfo.birthday=text; onChanged(basicInfo); }}></MyInput>
+        <MyInput title='邮箱' text={basicInfo.email} onChange={(text) => { basicInfo.email=text; onChanged(basicInfo); }}></MyInput>
+        <MyInput title='电话' text={basicInfo.phone} onChange={(text) => { basicInfo.phone=text; onChanged(basicInfo); }}></MyInput>
+      </div>
+    );
+  }
+}
+
 
 const Location: React.FC = () => {
   return (
@@ -66,7 +76,7 @@ class LeftSidebarDetail extends React.Component {
   state = {
     isLoading: true,
     error: null,
-    basicInfo: {name:"",birthday:"",title:"",email:"",phone:""},
+    basicInfo: { name: "", birthday: "", title: "", email: "", phone: "" },
   };
 
   componentDidMount() {
@@ -99,6 +109,10 @@ class LeftSidebarDetail extends React.Component {
 
   updateResume() {
     const data = new ResumeData();
+
+    console.log("data changed");
+    console.log(this.state.basicInfo);
+
     data.updateResumeData(this.state.basicInfo);
   }
 
@@ -127,14 +141,11 @@ class LeftSidebarDetail extends React.Component {
           overflowY: 'auto',
         }}>
           <Basic
-            title={basicInfo.title}
-            name={basicInfo.name}
-            birthday={basicInfo.birthday}
-            email={basicInfo.email}
-            phone={basicInfo.phone} ></Basic>
+            basicInfo={basicInfo}
+            onChanged={(info) => { this.setState({basicInfo: info})}} />
           <Location></Location>
           <ProfessionalSkill />
-          <MyButton src={topicon} onClick={()=>{ this.updateResume(); }}></MyButton>
+          <MyButton src={topicon} onClick={() => { this.updateResume(); }}></MyButton>
         </div>
 
       </div>
