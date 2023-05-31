@@ -3,14 +3,16 @@ import React from 'react';
 import { BasicInfo } from '../models/LeftSidebarModel';
 import ResumeData from '../service/GetResumeData';
 import getResumeData from '../service/GetResumeData';
+import { MyButton } from './Button';
 import { MyInput } from './Input';
+import topicon from '../icons/top.svg'
 
 
 const Basic: React.FC<BasicInfo> = (info: BasicInfo) => {
   return (
     <div style={{ width: '400px' }}>
       <label style={{ color: 'white' }}>基本信息</label>
-      <MyInput title='姓名' text={info.name} onChange={(text) => { info.name = text }}></MyInput>
+      <MyInput title='姓名' text={info.name} onChange={(text) => { console.log(text); }}></MyInput>
       <MyInput title='生日' text={info.birthday} onChange={(text) => { info.birthday = text }}></MyInput>
       <MyInput title='邮箱' text={info.email} onChange={(text) => { info.email = text }}></MyInput>
       <MyInput title='电话' text={info.phone} onChange={(text) => { info.phone = text }}></MyInput>
@@ -95,6 +97,11 @@ class LeftSidebarDetail extends React.Component {
       })
   }
 
+  updateResume() {
+    const data = new ResumeData();
+    data.updateResumeData(this.state.basicInfo);
+  }
+
   render() {
     const { basicInfo, isLoading, error } = this.state;
 
@@ -127,6 +134,7 @@ class LeftSidebarDetail extends React.Component {
             phone={basicInfo.phone} ></Basic>
           <Location></Location>
           <ProfessionalSkill />
+          <MyButton src={topicon} onClick={()=>{ this.updateResume(); }}></MyButton>
         </div>
 
       </div>

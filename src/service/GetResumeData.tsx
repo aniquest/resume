@@ -34,12 +34,7 @@ export default class ResumeData {
         name: "getResumeData",
         // 传给云函数的参数
         data: {
-          "key1": "test value 1",
-          "key2": "test value 2",
-          "userInfo": {
-            "appId": "",
-            "openId": "oaoLb4qz0R8STBj6ipGlHkfNCO2Q"
-          }
+          "name": "乌拉乌拉",
         }
       })
       .then((res) => {
@@ -56,6 +51,33 @@ export default class ResumeData {
       })
   }
 
+  public insertResumeData(basicInfo: BasicInfo) {
+    return this.app
+      .callFunction({
+        // 云函数名称
+        name: "insertResumeData",
+        // 传给云函数的参数
+        data: basicInfo
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .then(console.error);
+  }
+
+  public updateResumeData(basicInfo: BasicInfo) {
+    return this.app
+      .callFunction({
+        // 云函数名称
+        name: "updateResumeData",
+        // 传给云函数的参数
+        data: basicInfo
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .then(console.error);
+  }
 }
 
 
