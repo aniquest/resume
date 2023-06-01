@@ -7,6 +7,7 @@ import topicon from '../icons/top.svg'
 import { MyButton } from './Button';
 import Draggable from 'react-draggable';
 import MyLogin from './Login';
+import { makeStyles, TextField } from '@mui/material';
 
 interface WorkspaceProps {
   text: string;
@@ -14,7 +15,15 @@ interface WorkspaceProps {
   onRightClick: () => void;
 }
 
+const useStyles = makeStyles(() => ({
+  root: {
+    backgroundColor: '#f5f5f5',
+  },
+}));
+
 const Workspace: React.FC<WorkspaceProps> = ({ text, onLeftClick, onRightClick }) => {
+  const classes = useStyles();
+
   return (
     <div className='Workspace'>
       <div className='WorkspaceTopbar'>
@@ -35,6 +44,10 @@ const Workspace: React.FC<WorkspaceProps> = ({ text, onLeftClick, onRightClick }
         </Draggable>
       </div>
 
+
+      <TextField id="outlined-basic" label="Outlined" variant="outlined" color='primary' className={classes.root} />
+      <TextField id="filled-basic" label="Filled" variant="filled" />
+      <TextField id="standard-basic" label="Standard" variant="standard" />
     </div>
   );
 };

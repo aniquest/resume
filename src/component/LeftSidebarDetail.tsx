@@ -6,6 +6,7 @@ import getResumeData from '../service/GetResumeData';
 import { MyButton } from './Button';
 import { MyInput } from './Input';
 import topicon from '../icons/top.svg'
+import { Abbreviation } from './Abbreviation';
 
 interface IBasicInfo {
   basicInfo: BasicInfo,
@@ -13,22 +14,20 @@ interface IBasicInfo {
 }
 
 class Basic extends React.Component<IBasicInfo> {
-
   render() {
-    const {basicInfo, onChanged} = this.props;
+    const { basicInfo, onChanged } = this.props;
 
     return (
       <div style={{ width: '400px' }}>
         <label style={{ color: 'white' }}>基本信息</label>
-        <MyInput title='姓名' text={basicInfo.name} onChange={(text) => { basicInfo.name=text; onChanged(basicInfo);  }}></MyInput>
-        <MyInput title='生日' text={basicInfo.birthday} onChange={(text) => { basicInfo.birthday=text; onChanged(basicInfo); }}></MyInput>
-        <MyInput title='邮箱' text={basicInfo.email} onChange={(text) => { basicInfo.email=text; onChanged(basicInfo); }}></MyInput>
-        <MyInput title='电话' text={basicInfo.phone} onChange={(text) => { basicInfo.phone=text; onChanged(basicInfo); }}></MyInput>
+        <MyInput title='姓名' text={basicInfo.name} onChange={(text) => { basicInfo.name = text; onChanged(basicInfo); }}></MyInput>
+        <MyInput title='生日' text={basicInfo.birthday} onChange={(text) => { basicInfo.birthday = text; onChanged(basicInfo); }}></MyInput>
+        <MyInput title='邮箱' text={basicInfo.email} onChange={(text) => { basicInfo.email = text; onChanged(basicInfo); }}></MyInput>
+        <MyInput title='电话' text={basicInfo.phone} onChange={(text) => { basicInfo.phone = text; onChanged(basicInfo); }}></MyInput>
       </div>
     );
   }
 }
-
 
 const Location: React.FC = () => {
   return (
@@ -65,6 +64,36 @@ const ProfessionalSkill: React.FC = () => {
     </div>
   );
 };
+
+interface IProfiles {
+  prifiles: [{
+    network: string,
+    username: string,
+    website: string,
+  }]
+}
+
+class Profiles extends React.Component<IProfiles> {
+  render() {
+    const profiles = this.props.prifiles.map((item) => {
+      return (
+        <div>
+          <MyInput title='网站' text={item.network} onChange={(text) => { }}></MyInput>
+          <MyInput title='用户名' text={item.username} onChange={(text) => { }}></MyInput>
+          <MyInput title='网址' text={item.website} onChange={(text) => { }}></MyInput>
+        </div>
+      );
+    });
+
+    return (
+      <div style={{ width: '400px' }}>
+        <label style={{ color: 'white' }}>社交账号</label>
+        {profiles}
+      </div>
+    );
+  }
+}
+
 
 const Common: React.FC = () => {
   return (
@@ -142,9 +171,11 @@ class LeftSidebarDetail extends React.Component {
         }}>
           <Basic
             basicInfo={basicInfo}
-            onChanged={(info) => { this.setState({basicInfo: info})}} />
+            onChanged={(info) => { this.setState({ basicInfo: info }) }} />
           <Location></Location>
           <ProfessionalSkill />
+          <Profiles prifiles={[{network:"微信",username:"wulawula233",website:"www.weixin.qq"}]} />
+          <Abbreviation text="test"/>
           <MyButton src={topicon} onClick={() => { this.updateResume(); }}></MyButton>
         </div>
 

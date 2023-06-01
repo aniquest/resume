@@ -28,7 +28,7 @@
 .WorkspaceContent {
   text-align: center;
   display: flex;
-  flex-direction: colume;
+  flex-direction: column;
   justify-content: space-around;
   height: 100%;
   width: 100%;
