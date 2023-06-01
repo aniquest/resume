@@ -7,6 +7,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import HomeIcon from '@mui/icons-material/Home';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
+import { Classic } from '../template/classic';
 
 interface WorkspaceProps {
   text: string;
@@ -40,7 +41,8 @@ const Workspace: React.FC<WorkspaceProps> = ({ text, onLeftClick, onRightClick }
         flexDirection: 'row',
         justifyContent: 'space-between',
         backgroundColor: '#2E2E2E',
-        padding: 1
+        padding: 1,
+        zIndex: 999
       }}>
         <IconButton size="small" style={{ color: '#F5F5F5' }} onClick={() => {
           onLeftClick();
@@ -78,14 +80,15 @@ const Workspace: React.FC<WorkspaceProps> = ({ text, onLeftClick, onRightClick }
         </IconButton>
       </Box>
 
-      <div className='WorkspaceContent'>
-        <Draggable>
-          <div style={{ color: 'white' }}>
-            I can be dragged and resized
-          </div>
-        </Draggable>
-      </div>
-
+      <Box sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        flexGrow: 1,
+        justifyContent: 'space-around',
+        bgcolor: '#171717'
+      }}>
+        <Classic src=""></Classic>
+      </Box>
     </Box>
   );
 };

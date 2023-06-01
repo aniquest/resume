@@ -1,7 +1,7 @@
 import React from 'react';
 import LeftSidebarDetail from './LeftSidebarDetail';
 import './LeftSidebar.css';
-import { Box, IconButton } from '@mui/material';
+import { Box, Divider, IconButton } from '@mui/material';
 import { MoreVert } from '@mui/icons-material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
@@ -16,6 +16,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ visible }) => {
       flexDirection: 'row',
       justifyContent: 'space-between',
       backgroundColor: '#2E2E2E',
+      zIndex: 999
     }}>
       <Box sx={{
         display: 'flex',
@@ -26,6 +27,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ visible }) => {
         <IconButton size="large" style={{ color: '#F5F5F5' }} onClick={() => { }}>
           <AccountCircleIcon />
         </IconButton>
+        <Divider sx={{ bgcolor: '#ffffff' }} />
         <Box sx={{
           display: 'flex',
           flexDirection: 'column',

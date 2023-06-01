@@ -16,52 +16,48 @@ const RightSidebar: React.FC<RightSidebarProps> = ({ visible }) => {
       flexDirection: 'row',
       justifyContent: 'space-between',
       backgroundColor: '#2E2E2E',
+      zIndex: 999
     }}>
+      <RightSidebarDetail />
       <Box sx={{
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'space-around',
-        padding: 1
+        justifyContent: 'center',
+        padding: 1,
+        gap: 1
       }}>
-        <Box sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          gap: 1
-        }}>
-          <IconButton size="large" style={{ color: '#F5F5F5' }} onClick={() => { }}>
-            <AccountCircleIcon />
-          </IconButton>
-          <IconButton size="large" style={{ color: '#F5F5F5' }} onClick={() => { }}>
-            <LocationOnIcon />
-          </IconButton>
-          <IconButton size="large" style={{ color: '#F5F5F5' }} onClick={() => { }}>
-            <AccountCircleIcon />
-          </IconButton>
-          <IconButton size="large" style={{ color: '#F5F5F5' }} onClick={() => { }}>
-            <LocationOnIcon />
-          </IconButton>
-          <IconButton size="large" style={{ color: '#F5F5F5' }} onClick={() => { }}>
-            <AccountCircleIcon />
-          </IconButton>
-          <IconButton size="large" style={{ color: '#F5F5F5' }} onClick={() => { }}>
-            <LocationOnIcon />
-          </IconButton>
-          <IconButton size="large" style={{ color: '#F5F5F5' }} onClick={() => { }}>
-            <AccountCircleIcon />
-          </IconButton>
-          <IconButton size="large" style={{ color: '#F5F5F5' }} onClick={() => { }}>
-            <LocationOnIcon />
-          </IconButton>
-          <IconButton size="large" style={{ color: '#F5F5F5' }} onClick={() => { }}>
-            <AccountCircleIcon />
-          </IconButton>
-          <IconButton size="large" style={{ color: '#F5F5F5' }} onClick={() => { }}>
-            <LocationOnIcon />
-          </IconButton>
-        </Box>
+        <IconButton size="large" style={{ color: '#F5F5F5' }} onClick={() => { }}>
+          <AccountCircleIcon />
+        </IconButton>
+        <IconButton size="large" style={{ color: '#F5F5F5' }} onClick={() => { }}>
+          <LocationOnIcon />
+        </IconButton>
+        <IconButton size="large" style={{ color: '#F5F5F5' }} onClick={() => { }}>
+          <AccountCircleIcon />
+        </IconButton>
+        <IconButton size="large" style={{ color: '#F5F5F5' }} onClick={() => { }}>
+          <LocationOnIcon />
+        </IconButton>
+        <IconButton size="large" style={{ color: '#F5F5F5' }} onClick={() => { }}>
+          <AccountCircleIcon />
+        </IconButton>
+        <IconButton size="large" style={{ color: '#F5F5F5' }} onClick={() => { }}>
+          <LocationOnIcon />
+        </IconButton>
+        <IconButton size="large" style={{ color: '#F5F5F5' }} onClick={() => { }}>
+          <AccountCircleIcon />
+        </IconButton>
+        <IconButton size="large" style={{ color: '#F5F5F5' }} onClick={() => { }}>
+          <LocationOnIcon />
+        </IconButton>
+        <IconButton size="large" style={{ color: '#F5F5F5' }} onClick={() => { }}>
+          <AccountCircleIcon />
+        </IconButton>
+        <IconButton size="large" style={{ color: '#F5F5F5' }} onClick={() => { }}>
+          <LocationOnIcon />
+        </IconButton>
       </Box>
-      <RightSidebarDetail />
+
     </Box>
   );
 };
