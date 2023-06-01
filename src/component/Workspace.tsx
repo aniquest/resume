@@ -3,10 +3,10 @@ import './Workspace.css';
 import Draggable from 'react-draggable';
 import MyLogin from './Login';
 import { AppBar, Box, Divider, IconButton, Menu, MenuItem, Toolbar, Typography } from '@mui/material';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import HomeIcon from '@mui/icons-material/Home';
-import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import { Classic } from '../template/classic';
 import UndoIcon from '@mui/icons-material/Undo';
 import RedoIcon from '@mui/icons-material/Redo';
@@ -123,7 +123,7 @@ const Workspace: React.FC<WorkspaceProps> = ({ text, onLeftClick, onRightClick }
           onLeftClick();
           setIsLeftFolded(!isLeftFolded);
         }}>
-          {isLeftFolded ? <ArrowForwardIosIcon /> : <ArrowBackIosIcon />}
+          {isLeftFolded ? <ChevronRightIcon /> : <ChevronLeftIcon />}
         </IconButton>
         <Box sx={{
           display: 'flex',
@@ -139,7 +139,7 @@ const Workspace: React.FC<WorkspaceProps> = ({ text, onLeftClick, onRightClick }
             {text}
           </Typography>
           <IconButton size="small" style={{ color: '#F5F5F5' }} onClick={handleMenuShow} >
-            <MenuOpenIcon />
+            <KeyboardArrowDownIcon />
           </IconButton>
           <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose}>
             <MenuItem onClick={handleMenuClose}>Option 1</MenuItem>
@@ -151,7 +151,7 @@ const Workspace: React.FC<WorkspaceProps> = ({ text, onLeftClick, onRightClick }
           onRightClick();
           setIsRightFolded(!isLeftFolded);
         }}>
-          {isRightFolded ? <ArrowBackIosIcon /> : <ArrowForwardIosIcon />}
+          {isRightFolded ? <ChevronLeftIcon /> : <ChevronRightIcon />}
         </IconButton>
       </Box>
 

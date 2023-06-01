@@ -17,11 +17,28 @@ export class Classic extends React.Component<ClassicProps> {
           <Box sx={{
             width: '210mm',
             height: '297mm',
-            backgroundColor: 'white'
+            backgroundColor: 'white',
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
           }}>
-            <Typography id="modal-modal-description" sx={{ color: "#F5F5F5" }}>
-              test
-            </Typography>
+            <Box sx={{
+              backgroundColor: '#E5EFF9',
+              width: '30%',
+              height: '100%',
+            }}>
+              <Typography id="modal-modal-description" sx={{ color: "#000000" }}>
+                test
+              </Typography>
+            </Box>
+            <Box sx={{
+              backgroundColor: '#FFFFFF',
+              width: '10%',
+              height: '100%',
+            }}>
+
+            </Box>
+
           </Box>
         </ResizableBox>
 
