@@ -1,78 +1,86 @@
+import { Fingerprint, MoreVert } from '@mui/icons-material';
+import HomeIcon from '@mui/icons-material/Home';
+import { Box, IconButton, Modal, Typography } from '@mui/material';
 import React from 'react';
-import { MyButton } from './Button';
-import Modal from './Modal';
 
 export interface AbbreviationProps {
-  text: string,
+  mainTitle: string,
+  subTitle: string
+  children: React.ReactNode,
 }
+
+const style = {
+  position: 'absolute' as 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: '#171717',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+  display: 'flex',
+  flexDirection: 'column', 
+  padding: 2,
+  gap: 3 
+};
 
 export class Abbreviation extends React.Component<AbbreviationProps> {
   state = { isHovered: false, isModalOpen: false, };
 
-  handleMouseEnter = () => {
-    this.setState({ isHovered: true });
+  handleOpen = () => {
+    this.setState({ isModalOpen: true });
   };
 
-  handleMouseLeave = () => {
-    this.setState({ isHovered: false });
+  handleClose = () => {
+    this.setState({ isModalOpen: false });
   };
 
   render() {
     return (
-      <div style={{
+      <Box sx={{
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        border: this.state.isHovered ? "1px solid  #F5F5F5" : '1px solid #4D4D4D',
+        border: '1px solid #4D4D4D',
         padding: '15px',
         borderRadius: '5px',
-        margin: '16px',
-        position: 'relative'
+        '&:hover': { border: "1px solid  #F5F5F5" }
       }}>
-        <div style={{
+        <Box sx={{
           display: 'flex',
           flexDirection: 'column',
-          alignItems: 'flex-start',
+          justifyContent: 'flex-start',
         }}>
-          <label style={{
-            position: 'relative',
-            backgroundColor: '#171717',
-            color: 'rgb(255, 255, 255)',
-            padding: '0 10px',
-            userSelect: 'none',
-            fontFamily: 'Inter, sans-serif',
-            fontWeight: '600',
-            fontSize: 'inherit',
-            lineHeight: '1.4375em',
-            display: 'block'
-          }}>
-            {this.props.text}
-          </label>
+          <Typography id="modal-modal-title" variant="h6" component="h2" sx={{ color: "#F5F5F5" }}>
+            {this.props.mainTitle}
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ color: "#F5F5F5" }}>
+            {this.props.subTitle}
+          </Typography>
+        </Box>
 
-          <label style={{
-            position: 'relative',
-            backgroundColor: '#171717',
-            color: 'rgba(255, 255, 255, 0.7)',
-            padding: '0 10px',
-            userSelect: 'none',
-            fontFamily: 'Inter, sans-serif',
-            fontWeight: '400',
-            fontSize: '0.857143rem',
-            lineHeight: '1.4375em',
-          }}>
-            {this.props.text}
-          </label>
-        </div>
+        <IconButton size="small" style={{color:'#F5F5F5'}}  onClick={() => { this.setState({ isModalOpen: true }); }}>
+          <MoreVert/>
+        </IconButton>
 
-        <MyButton src="" onClick={() => { this.setState({ isModalOpen: true }); }}></MyButton>
-
-        <Modal isOpen={this.state.isModalOpen} onClose={() => { this.setState({ isModalOpen: false }); }}>
-          <h1>Modal Title</h1>
-          <p>Modal Content</p>
-          <button onClick={() => { this.setState({ isModalOpen: false }); }}>Close Modal</button>
+        <Modal
+          open={this.state.isModalOpen}
+          onClose={this.handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <Typography id="modal-modal-title" variant="h6" component="h2" sx={{ color: "#F5F5F5" }}>
+              Text in a modal
+            </Typography>
+            <Typography id="modal-modal-description" sx={{ mt: 2, color: "#F5F5F5" }}>
+              Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+            </Typography>
+            {this.props.children}
+          </Box>
         </Modal>
-
-      </div>
+      </Box>
     );
   }
 }

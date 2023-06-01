@@ -1,13 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Workspace.css';
-import lefticon from '../icons/arrow-left.svg'
-import righticon from '../icons/arrow-right.svg'
-import homeicon from '../icons/home.svg'
-import topicon from '../icons/top.svg'
-import { MyButton } from './Button';
 import Draggable from 'react-draggable';
 import MyLogin from './Login';
-import { makeStyles, TextField } from '@mui/material';
+import { Box, IconButton, Menu, MenuItem, Typography } from '@mui/material';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import HomeIcon from '@mui/icons-material/Home';
+import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 
 interface WorkspaceProps {
   text: string;
@@ -15,26 +14,69 @@ interface WorkspaceProps {
   onRightClick: () => void;
 }
 
-const useStyles = makeStyles(() => ({
-  root: {
-    backgroundColor: '#f5f5f5',
-  },
-}));
-
 const Workspace: React.FC<WorkspaceProps> = ({ text, onLeftClick, onRightClick }) => {
-  const classes = useStyles();
+  const [isLeftFolded, setIsLeftFolded] = useState(false);
+  const [isRightFolded, setIsRightFolded] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleMenuShow = (event: any) => {
+    setAnchorEl(event.currentTarget);
+  };
 
   return (
-    <div className='Workspace'>
-      <div className='WorkspaceTopbar'>
-        <MyButton src={lefticon} onClick={onLeftClick} />
-        <div className='WorkspaceTitle'>
-          <MyButton src={homeicon} onClick={onRightClick} />
-          <p className='Title'>{text}</p>
-          <MyButton src={topicon} onClick={onRightClick} />
-        </div>
-        <MyButton src={righticon} onClick={onRightClick} />
-      </div>
+    <Box sx={{
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'space-between',
+      height: '100%',
+      width: '100%'
+    }}>
+      <Box sx={{
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        backgroundColor: '#2E2E2E',
+        padding: 1
+      }}>
+        <IconButton size="small" style={{ color: '#F5F5F5' }} onClick={() => {
+          onLeftClick();
+          setIsLeftFolded(!isLeftFolded);
+        }}>
+          {isLeftFolded ? <ArrowForwardIosIcon /> : <ArrowBackIosIcon />}
+        </IconButton>
+        <Box sx={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'space-around',
+          alignItems: 'center',
+          gap: 2
+        }} >
+          <IconButton size="small" style={{ color: '#F5F5F5' }}>
+            <HomeIcon />
+          </IconButton>
+          <Typography id="modal-modal-description" sx={{ color: "#F5F5F5" }}>
+            {text}
+          </Typography>
+          <IconButton size="small" style={{ color: '#F5F5F5' }} onClick={handleMenuShow} >
+            <MenuOpenIcon />
+          </IconButton>
+          <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose}>
+            <MenuItem onClick={handleMenuClose}>Option 1</MenuItem>
+            <MenuItem onClick={handleMenuClose}>Option 2</MenuItem>
+            <MenuItem onClick={handleMenuClose}>Option 3</MenuItem>
+          </Menu>
+        </Box>
+        <IconButton size="small" style={{ color: '#F5F5F5' }} onClick={() => {
+          onRightClick();
+          setIsRightFolded(!isLeftFolded);
+        }}>
+          {isRightFolded ? <ArrowBackIosIcon /> : <ArrowForwardIosIcon />}
+        </IconButton>
+      </Box>
 
       <div className='WorkspaceContent'>
         <Draggable>
@@ -44,11 +86,7 @@ const Workspace: React.FC<WorkspaceProps> = ({ text, onLeftClick, onRightClick }
         </Draggable>
       </div>
 
-
-      <TextField id="outlined-basic" label="Outlined" variant="outlined" color='primary' className={classes.root} />
-      <TextField id="filled-basic" label="Filled" variant="filled" />
-      <TextField id="standard-basic" label="Standard" variant="standard" />
-    </div>
+    </Box>
   );
 };
 
