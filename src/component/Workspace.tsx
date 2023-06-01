@@ -115,6 +115,7 @@ const Workspace: React.FC<WorkspaceProps> = ({ text, onLeftClick, onRightClick }
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
+        backgroundColor: '#262626',
         padding: 1,
         zIndex: 999
       }}>
